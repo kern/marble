@@ -1,0 +1,1 @@
+MarbleApp::Application.config.session_store :cookie_store, :key => '_marble_app_session'

@@ -1,0 +1,9 @@
+source 'http://rubygems.org'
+
+gem 'rails', '3.0.5'
+gem 'marble', :path => '../../'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 2.5'
+  gem 'fuubar', '0.0.4'
+end

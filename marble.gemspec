@@ -21,4 +21,6 @@ Gem::Specification.new do |s|
   
   s.add_development_dependency 'rspec', '~> 2.5'
   s.add_development_dependency 'fuubar', '0.0.4'
+  s.add_development_dependency 'rails', '3.0.5'
+  s.add_development_dependency 'rspec-rails', '~> 2.5'
 end
