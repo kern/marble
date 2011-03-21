@@ -1,1 +1,1 @@
-script: "rake all_specs"
+script: "cd spec/rails3 && bundle && cd - && rake all_specs"
