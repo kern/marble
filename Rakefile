@@ -11,6 +11,6 @@ end
 task :all_specs => :spec do
   sh <<-CMD
     cd spec/rails3
-    bundle exec rake
+    rake spec
   CMD
 end
