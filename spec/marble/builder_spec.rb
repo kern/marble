@@ -19,7 +19,7 @@ describe Marble::Builder do
         end
       end
       
-      it 'shoud return the value of the block' do
+      it 'should return the value of the block' do
         @builder.build do |m|
           m.hash do
             m.foo 'foo'
@@ -41,52 +41,66 @@ describe Marble::Builder do
     end
   end
   
-  describe '#write' do
-    context 'when #current is nil' do
-      it 'should silently be ignored' do
-        @builder.build do |m|
-          m.write 'test', 'lol'
-        end.should be_nil
-      end
-    end
-    
-    context 'when #current is a hash' do
-      context 'when called with a block' do
-        it 'should add the value of the block to #current with the key as the method name' do
-          @builder.hash do |m|
-            m.write 'foo' do
-              'bar'
+  describe '#item' do
+    context 'when called with a block' do
+      context 'when called with a structure type' do
+        it 'should push the structure to #current' do
+          @builder.array do |m|
+            m.item :array do
+              m.item 'bar'
             end
-          end.should == { 'foo' => 'bar' }
+          end.should == [['bar']]
         end
       end
       
-      context 'when called without a block' do
-        it 'should add value to #current with the key as the method name' do
-          @builder.hash do |m|
-            m.write 'foo', 'bar'
-          end.should == { 'foo' => 'bar' }
-        end
-      end
-    end
-    
-    context 'when #current is an array' do
-      context 'when called with a block' do
+      context 'when called without a structure type' do
         it 'should push the value of the block to #current' do
           @builder.array do |m|
-            m.foo do
+            m.item do
               'bar'
             end
           end.should == ['bar']
         end
       end
-      
-      context 'when called without a block' do
-        it 'should push the argument to #current' do
-          @builder.array do |m|
-            m.foo 'bar'
-          end.should == ['bar']
+    end
+    
+    context 'when called without a block' do
+      it 'should push the argument to #current' do
+        @builder.array do |m|
+          m.item 'bar'
+        end.should == ['bar']
+      end
+    end
+  end
+  
+  describe '#pair' do
+    context 'when called with a block' do
+      context 'when called with a structure type' do
+        it 'should add the value of the block to #current with the key as the method name' do
+          @builder.hash do |m|
+            m.pair 'foo', :hash do
+              m.pair 'bar', 'baz'
+            end
+          end.should == { 'foo' => { 'bar' => 'baz' } }
         end
+      end
+      
+      context 'when called without a structure type' do
+        it 'should add the value of the block to #current with the key as the method name' do
+          @builder.hash do |m|
+            m.pair 'foo' do
+              'bar'
+            end
+          end.should == { 'foo' => 'bar' }
+        end
+      end
+    end
+    
+    context 'when called without a block' do
+      it 'should add value to #current with the key as the method name' do
+        @builder.hash do |m|
+          m.pair 'foo', 'bar'
+        end.should == { 'foo' => 'bar' }
       end
     end
   end
@@ -116,37 +130,33 @@ describe Marble::Builder do
   end
   
   describe '#method_missing' do
-    context 'when called with :hash' do
-      it 'should be equivalent to nesting #hash within the block' do
+    context 'when called in a context that responds to #push' do
+      it 'should proxy to #item' do
         @builder.array do |m|
+          m.foo :array do
+            m.bar 'baz'
+          end
+        end.should == [['baz']]
+      end
+    end
+    
+    context 'when called in a context that responds to #[]= but not #push' do
+      it 'should proxy to #pair' do
+        @builder.hash do |m|
           m.foo :hash do
             m.bar 'baz'
           end
-        end.should == [{ 'bar' => 'baz' }]
+        end.should == { 'foo' => { 'bar' => 'baz' } }
       end
     end
     
-    context 'when called with :array' do
-      it 'should be equivalent to nesting #array within the block' do
-        @builder.array do |m|
-          m.foo :array do
-            m.item 'bar'
-            m.item 'baz'
+    context 'when called in any other context' do
+      it 'should raise NoMethodError' do
+        expect {
+          @builder.build do |m|
+            m.bar
           end
-        end.should == [['bar', 'baz']]
-      end
-    end
-    
-    context 'when called with anything else' do
-      it 'should call #write' do
-        @builder.array do |m|
-          m.foo [] do
-            m.ignore_me 'lolololol'
-            'baz'
-          end
-          
-          m.foo {}
-        end.should == ['baz', nil]
+        }.to raise_error(NoMethodError)
       end
     end
   end

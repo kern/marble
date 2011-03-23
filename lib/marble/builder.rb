@@ -1,48 +1,47 @@
 module Marble
   class Builder
-    def build
-      block_given? ? value_structure { yield(self) } : nil
+    def build(&block)
+      value_structure(&block)
     end
     
-    def hash
-      insert_structure({}) do
-        yield self if block_given?
-      end
+    def hash(&block)
+      insert_structure({}, &block)
     end
     
-    def array
-      insert_structure([]) do
-        yield self if block_given?
-      end
+    def array(&block)
+      insert_structure([], &block)
     end
     
-    def method_missing(method, *args)
-      if block_given?
-        case args[0]
-        when :hash then write(method) { hash { yield(self) } }
-        when :array then write(method) { array { yield(self) } }
-        else write(method) { value_structure { yield(self) } }
-        end
+    def method_missing(method, *args, &block)
+      if @current.respond_to?(:push)
+        item(*args, &block)
+      elsif @current.respond_to?(:[]=)
+        pair(method.to_s, *args, &block)
       else
-        write(method, args[0])
+        super
       end
     end
     
-    def write(key, value = nil)
-      value = value_structure { yield(self) } if block_given?
-      
-      case @current
-      when Hash then @current[key.to_s] = value
-      when Array then @current.push(value)
+    def item(value_or_structure_type = nil, &block)
+      if block_given?
+        @current.push evaluate_structure(value_or_structure_type, &block)
+      else
+        @current.push value_or_structure_type
+      end
+    end
+    
+    def pair(key, value_or_structure_type = nil, &block)
+      if block_given?
+        @current[key] = evaluate_structure(value_or_structure_type, &block)
+      else
+        @current[key] = value_or_structure_type
       end
     end
     
     protected
     
-    def value_structure
-      insert_structure(nil) do
-        yield self if block_given?
-      end
+    def value_structure(&block)
+      insert_structure(nil, &block)
     end
     
     def insert_structure(structure)
@@ -54,6 +53,14 @@ module Marble
       end
       
       structure || value
+    end
+    
+    def evaluate_structure(type, &block)
+      case type
+      when :hash then hash(&block)
+      when :array then array(&block)
+      else value_structure(&block)
+      end
     end
   end
 end
