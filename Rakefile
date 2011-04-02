@@ -1,16 +1,17 @@
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
-task :default => :spec
+task :default => :test
 
-require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new do |spec|
-  spec.pattern = 'spec/marble/**/*_spec.rb'
+require 'rake/testtask'
+Rake::TestTask.new do |t|
+  t.libs << 'test'
+  t.pattern = 'test/marble/test_*.rb'
 end
 
-task :all_specs => :spec do
+task :all_tests => :test do
   sh <<-CMD
-    cd spec/rails3
-    rake spec
+    cd test/rails3
+    rake
   CMD
 end
