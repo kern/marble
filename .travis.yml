@@ -1,1 +1,1 @@
-script: "rake all_specs"
+script: "rake all_tests"
