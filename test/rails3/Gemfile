@@ -7,4 +7,5 @@ group :development, :test do
   gem 'minitest', '~> 2.0'
   gem 'mocha', '~> 0.9'
   gem 'autotest', '~> 4.4'
+  gem 'json', '~> 1.5'
 end

@@ -23,4 +23,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'mocha', '~> 0.9'
   s.add_development_dependency 'autotest', '~> 4.4'
   s.add_development_dependency 'rails', '3.0.5'
+  s.add_development_dependency 'json', '~> 1.5'
 end
