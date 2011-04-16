@@ -7,7 +7,6 @@ task :test => ['test:unit', 'test:rails']
 
 require 'rake/testtask'
 Rake::TestTask.new('test:unit') do |t|
-  t.options = '-v'
   t.ruby_opts += ['-rubygems']
   t.libs << 'test'
   t.pattern = 'test/marble/test_*.rb'
