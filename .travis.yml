@@ -1,4 +1,4 @@
-script: 'rake all_tests -v'
+script: 'rake test:rails'
 rvm:
   - 1.8.7
   - 1.9.2
