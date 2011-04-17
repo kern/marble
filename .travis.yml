@@ -1,4 +1,4 @@
-script: 'cd test/rails3 && rake'
+script: 'rake test'
 rvm:
   - 1.8.7
   - 1.9.2

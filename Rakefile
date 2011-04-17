@@ -18,12 +18,3 @@ task 'test:rails' do
     bundle exec rake
   CMD
 end
-
-task 'test:rails:bundle' do
-  sh <<-CMD
-   cd test/rails3
-   bundle install
-  CMD
-end
-
-task 'test:travis' => ['test:rails:bundle', 'test']
