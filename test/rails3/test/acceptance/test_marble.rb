@@ -4,7 +4,7 @@ require 'test_helper'
 
 puts '8ad6yfiasfdf'
 
-class TestMarble < ActionController::IntegrationTest
+class TestMarble < ActionDispatch::IntegrationTest
   def test_render_json
     get '/', :format => :json
     assert_equal({ 'instance' => 'OK', 'local' => 'OK' }, JSON.parse(response.body))

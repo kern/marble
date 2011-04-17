@@ -2,11 +2,11 @@ ENV['RAILS_ENV'] ||= 'test'
 
 puts 'GOD!L:SKJDF:LSKJDF'
 
+require 'bundle/setup'
+
+puts 'asdddd'
+
 require File.expand_path('../../config/environment', __FILE__)
-
-puts '!!!!!'
-
-require 'minitest/autorun'
 
 puts '67890'
 
