@@ -1,8 +1,4 @@
-puts 'falisdhhh'
-
 require 'test_helper'
-
-puts '8ad6yfiasfdf'
 
 class MarbleTest < ActionDispatch::IntegrationTest
   def test_render_json

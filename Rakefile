@@ -14,7 +14,7 @@ end
 
 task 'test:rails' do
   sh <<-CMD
-    cd test/rails3
-    bundle exec rake
+    cd test/rails
+    rake
   CMD
 end
