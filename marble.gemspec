@@ -24,4 +24,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'autotest', '~> 4.4'
   s.add_development_dependency 'rails', '3.0.5'
   s.add_development_dependency 'json', '~> 1.5'
+  s.add_development_dependency 'yard', '~> 0.6'
+  s.add_development_dependency 'rdiscount', '~> 1.6'
 end
