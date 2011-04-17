@@ -2,7 +2,7 @@ ENV['RAILS_ENV'] ||= 'test'
 
 puts 'GOD!L:SKJDF:LSKJDF'
 
-require 'bundle/setup'
+require 'bundler/setup'
 
 puts 'asdddd'
 
