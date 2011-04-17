@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class TestBuilder < MiniTest::Unit::TestCase
+class TestMarble < MiniTest::Unit::TestCase
   def setup
-    @builder = Marble::Builder.new
+    @builder = Marble.new
   end
   
   def test_build

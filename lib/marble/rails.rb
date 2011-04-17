@@ -1,11 +1,11 @@
-module Marble
+class Marble
   module Rails
     class TemplateHandler
       class_attribute :default_format
       self.default_format = Mime::JSON
       
       def call(template)
-        compiled = "builder = Marble::Builder.new;" +
+        compiled = "builder = Marble.new;" +
                    "builder.build { |marble| #{template.source} }."
         
         if template.formats.include?(:yaml)

@@ -1,3 +1,3 @@
-module Marble
+class Marble
   VERSION = '0.0.1'
 end
