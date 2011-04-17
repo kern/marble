@@ -1,4 +1,8 @@
+puts 'falisdhhh'
+
 require 'test_helper'
+
+puts '8ad6yfiasfdf'
 
 class TestMarble < ActionController::IntegrationTest
   def test_render_json
