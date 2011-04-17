@@ -10,13 +10,13 @@ require File.expand_path('../../config/environment', __FILE__)
 
 puts '67890'
 
-require 'minitest/pride'
-
-puts '574524'
-
 require 'rails/test_help'
 
 puts '`L:SKJDF:```````'
+
+require 'minitest/pride'
+
+puts '574524'
 
 require 'mocha'
 
