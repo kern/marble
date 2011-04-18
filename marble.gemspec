@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Alexander Kern']
   s.email       = ['alex@kernul.com']
   s.homepage    = 'https://github.com/CapnKernul/marble'
-  s.summary     = %q{Ruby object literal builder}
+  s.summary     = %q{Ruby object builder}
   s.description = %q{DSL for creating complex Ruby hashes and arrays}
   
   s.rubyforge_project = 'marble'
@@ -25,5 +25,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rails', '3.0.5'
   s.add_development_dependency 'json', '~> 1.5'
   s.add_development_dependency 'yard', '~> 0.6'
-  s.add_development_dependency 'rdiscount', '~> 1.6'
+  s.add_development_dependency 'maruku', '~> 0.6'
 end

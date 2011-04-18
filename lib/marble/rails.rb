@@ -1,24 +1,30 @@
 class Marble
+  # Container for Rails-related Marble classes
   module Rails
     # Rails plugin for using Marble as a template handler.
     # 
-    # Use the +marble+ variable to build a template. If you'd like to rename
-    # the +marble+ variable (for example, to +m+), just use a parameter:
+    # Marble has three output formats: text, JSON, and YAML. The template
+    # handler calls `to_s`, `to_json`, and `to_yaml` for each format,
+    # respectively.
+    # 
+    # Marble sets up a builder for you; simply use the `marble` variable to
+    # access the builder. To rename the builder to another, possibly shorter
+    # variable in order to save keystrokes, put the new variable name as the
+    # name of the block parameter:
     # 
     #     marble.hash do |m|
-    #       m.zombies 'run!'
+    #       m.free 'toast'
     #     end
     # 
-    # Marble is able to generate object literal, JSON, and YAML formats from
-    # any Marble template. The naming schemes are as follows:
-    # 
-    # * Object literal: +view_name.to_s.marble+
-    # * JSON: +view_name.json.marble+
-    # * YAML: +view_name.yaml.marble+
+    # Marble loads this module only if it can find `ActionView`.
     class TemplateHandler
       class_attribute :default_format
       self.default_format = Mime::JSON
       
+      # Compile the Rails template.
+      # 
+      # @param template [Class] the Rails template class
+      # @return [String] the compiled template
       def call(template)
         compiled = "builder = Marble.new;" +
                    "builder.build { |marble| #{template.source} }."
