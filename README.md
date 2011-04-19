@@ -1,7 +1,8 @@
 # marble [![StillMaintained Status](http://stillmaintained.com/CapnKernul/marble.png)](http://stillmaintained.com/CapnKernul/marble) [![Build Status](http://travis-ci.org/CapnKernul/marble.png)](http://travis-ci.org/CapnKernul/marble) #
 
 Marble is a Ruby object builder. It makes generating complex Ruby objects, and
-by extension JSON and YAML, much more readable.
+by extension JSON and YAML, much more readable. It's especially useful for Rails
+JSON API templates.
 
 ## Installation ##
 
