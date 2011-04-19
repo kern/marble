@@ -56,7 +56,7 @@ class Marble
   # 
   # @yield [builder] block to evaluate within the hash's context
   # @yieldparam builder [Marble] the current builder
-  # @yieldreturn [Object] the built hash
+  # @return [Hash] the built hash
   def hash(&block)
     insert_structure({}, &block)
   end
@@ -273,5 +273,5 @@ end
 require 'marble/version'
 
 if defined? ActionView::Template
-  require 'marble/rails'
+  require 'marble/rails_template_handler'
 end
