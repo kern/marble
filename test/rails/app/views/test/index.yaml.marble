@@ -1,0 +1,4 @@
+marble.hash do |m|
+  m.instance @instance_var
+  m.local    local_var
+end
