@@ -74,7 +74,7 @@ See the `Marble::RailsTemplateHandler` documentation for more details.
 ## Resources ##
 
 * [GitHub Repository](https://github.com/CapnKernul/marble)
-* [Documentation](http://rubydoc.info/github/CapnKernul/marble/master/frames)
+* [Documentation](http://rubydoc.info/github/CapnKernul/marble)
 
 ## License ##
 
