@@ -32,7 +32,7 @@ class Marble
   # 
   # @yield [builder] block to evaluate for the value
   # @yieldparam builder [Marble] the current builder
-  # @yieldreturn [Object] the built value
+  # @return [Object] the built value
   def build(&block)
     value_structure(&block)
   end
@@ -80,7 +80,7 @@ class Marble
   # 
   # @yield [builder] block to evaluate within the array's context
   # @yieldparam builder [Marble] the current builder
-  # @yieldreturn [Object] the built array
+  # @return [Array] the built array
   def array(&block)
     insert_structure([], &block)
   end
@@ -232,7 +232,6 @@ class Marble
   # 
   # @yield [builder] block to evaluate for the value
   # @yieldparam builder [Marble] the current builder
-  # @yieldreturn [Object] the built value
   def value_structure(&block)
     insert_structure(nil, &block)
   end
@@ -242,7 +241,6 @@ class Marble
   # @param structure [Object] the new structure to insert
   # @yield [builder] block to evaluate for the value
   # @yieldparam builder [Marble] the current builder
-  # @yieldreturn [Object] the built value
   def insert_structure(structure)
     if block_given?
       parent = @current
@@ -260,7 +258,6 @@ class Marble
   # @param type [Symbol] the structure type
   # @yield [builder] block to evaluate for the value
   # @yieldparam builder [Marble] the current builder
-  # @yieldreturn [Object] the built value
   def evaluate_structure(type, &block)
     case type
     when :hash then hash(&block)
