@@ -31,7 +31,7 @@ class Marble
   #     end # => ['foo']
   # 
   # @yield [builder] block to evaluate for the value
-  # @yieldparam builder [Marble] the current builder
+  # @yieldparam [Marble] builder the current builder
   # @return [Object] the built value
   def build(&block)
     value_structure(&block)
@@ -55,7 +55,7 @@ class Marble
   #     end # => { 'foo' => { 'bar' => 'baz' } }
   # 
   # @yield [builder] block to evaluate within the hash's context
-  # @yieldparam builder [Marble] the current builder
+  # @yieldparam [Marble] builder the current builder
   # @return [Hash] the built hash
   def hash(&block)
     insert_structure({}, &block)
@@ -79,7 +79,7 @@ class Marble
   #     end # => [['foo']]
   # 
   # @yield [builder] block to evaluate within the array's context
-  # @yieldparam builder [Marble] the current builder
+  # @yieldparam [Marble] builder the current builder
   # @return [Array] the built array
   def array(&block)
     insert_structure([], &block)
@@ -151,15 +151,15 @@ class Marble
   # Choose the format that makes the most sense in a given context.
   # 
   # @overload item(value)
-  #   @param value [Object] the value to insert into the item
+  #   @param [Object] value the value to insert into the item
   # @overload item()
   #   @yield [builder] block to evaluate for the item's value
-  #   @yieldparam builder [Marble] the current builder
+  #   @yieldparam [Marble] builder the current builder
   #   @yieldreturn [Object] the value to insert into the item
   # @overload item(structure_type)
-  #   @param structure_type [:array, :hash] the block's structure type
+  #   @param [:array, :hash] structure_type the block's structure type
   #   @yield [builder] block to evaluate for the item's value
-  #   @yieldparam builder [Marble] the current builder
+  #   @yieldparam [Marble] builder the current builder
   #   @yieldreturn [Object] the value to insert into the item
   def item(value_or_structure_type = nil, &block)
     if block_given?
@@ -202,18 +202,18 @@ class Marble
   # Choose the format that makes the most sense in a given context.
   # 
   # @overload pair(key, value)
-  #   @param key [Object] the key to use for the pair
-  #   @param value [Object] the value to insert into the pair
+  #   @param [Object] key the key to use for the pair
+  #   @param [Object] value the value to insert into the pair
   # @overload pair(key)
-  #   @param key [Object] the key to use for the pair
+  #   @param [Object] key the key to use for the pair
   #   @yield [builder] block to evaluate for the pair's value
-  #   @yieldparam builder [Marble] the current builder
+  #   @yieldparam [Marble] builder the current builder
   #   @yieldreturn [Object] the value to insert into the pair
   # @overload pair(key, structure_type)
-  #   @param key [Object] the key to use for the pair
-  #   @param structure_type [:array, :hash] the block's structure type
+  #   @param [Object] key the key to use for the pair
+  #   @param [:array, :hash] structure_type the block's structure type
   #   @yield [builder] block to evaluate for the pair's value
-  #   @yieldparam builder [Marble] the current builder
+  #   @yieldparam [Marble] builder the current builder
   #   @yieldreturn [Object] the value to insert into the pair
   def pair(key, value_or_structure_type = nil, &block)
     if block_given?
@@ -231,16 +231,16 @@ class Marble
   # to whatever the block evaluates.
   # 
   # @yield [builder] block to evaluate for the value
-  # @yieldparam builder [Marble] the current builder
+  # @yieldparam [Marble] builder the current builder
   def value_structure(&block)
     insert_structure(nil, &block)
   end
   
   # Inserts a structure into the current structure.
   # 
-  # @param structure [Object] the new structure to insert
+  # @param [Object] structure the new structure to insert
   # @yield [builder] block to evaluate for the value
-  # @yieldparam builder [Marble] the current builder
+  # @yieldparam [Marble] builder the current builder
   def insert_structure(structure)
     if block_given?
       parent = @current
@@ -255,9 +255,9 @@ class Marble
   # Convenience method for inserting the correct structure type based on a
   # symbol.
   # 
-  # @param type [Symbol] the structure type
+  # @param [Symbol] type the structure type
   # @yield [builder] block to evaluate for the value
-  # @yieldparam builder [Marble] the current builder
+  # @yieldparam [Marble] builder the current builder
   def evaluate_structure(type, &block)
     case type
     when :hash then hash(&block)

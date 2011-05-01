@@ -1,3 +1,6 @@
 --readme          README.md
 --markup          markdown
 --markup-provider maruku
+--default-return  ""
+--title           "Marble Documentation"
+--hide-void-return

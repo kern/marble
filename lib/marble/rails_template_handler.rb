@@ -21,7 +21,7 @@ class Marble
     
     # Compile the Rails template.
     # 
-    # @param template [Class] the Rails template class
+    # @param [Class] template the Rails template class
     # @return [String] the compiled template
     def call(template)
       compiled = "builder = Marble.new;" +
