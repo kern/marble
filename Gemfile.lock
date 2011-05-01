@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    marble (0.0.1)
+    marble (0.1.0)
 
 GEM
   remote: http://rubygems.org/
